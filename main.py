@@ -9,18 +9,44 @@ def main():
     parser = argparse.ArgumentParser(description="EUR/USD Prediction Project Entry Point")
     
     group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument('--fetch', action='store_true', help='Fetch latest data')
-    group.add_argument('--train', action='store_true', help='Train the LSTM model')
-    group.add_argument('--predict', action='store_true', help='Make a prediction for the next day')
-    group.add_argument('--web', action='store_true', help='Run the web application')
+    group.add_argument('-f', '--fetch', action='store_true', help='Fetch latest data')
+    group.add_argument('-t', '--train', action='store_true', help='Train the LSTM model')
+    group.add_argument('-p', '--predict', action='store_true', help='Make a prediction for the next day')
+    group.add_argument('-w', '--web', action='store_true', help='Run the web application')
     group.add_argument('--pipeline', action='store_true', help='Run full pipeline: Fetch -> Train -> Web')
+    group.add_argument('-i', '--interactive', action='store_true', help='Show interactive menu')
     
     args = parser.parse_args()
     
-    # Default to pipeline if no arguments provided
-    if not any([args.fetch, args.train, args.predict, args.web, args.pipeline]):
-        print("No arguments provided. Defaulting to full pipeline...")
-        args.pipeline = True
+    # Interactive mode if requested OR no arguments provided
+    if args.interactive or not any([args.fetch, args.train, args.predict, args.web, args.pipeline]):
+        print("\nWelcome to EUR/USD Predictor!")
+        print("Please select an action:")
+        print("1. Fetch latest data")
+        print("2. Train model")
+        print("3. Make prediction")
+        print("4. Run web application")
+        print("5. Run full pipeline (Fetch -> Train -> Web)")
+        print("6. Exit")
+        
+        try:
+            choice = input("\nEnter choice (1-6): ")
+            if choice == '1':
+                args.fetch = True
+            elif choice == '2':
+                args.train = True
+            elif choice == '3':
+                args.predict = True
+            elif choice == '4':
+                args.web = True
+            elif choice == '5':
+                args.pipeline = True
+            else:
+                print("Exiting...")
+                return
+        except KeyboardInterrupt:
+            print("\nExiting...")
+            return
     
     if args.fetch:
         from src.data.fetch_data import fetch_data
