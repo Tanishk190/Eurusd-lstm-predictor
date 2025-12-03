@@ -12,8 +12,10 @@ def fetch_data():
         return
 
     # Save to CSV in data directory
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    data_dir = os.path.join(script_dir, "data")
+    # Go up two levels: src/data -> src -> project_root
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(os.path.dirname(current_dir))
+    data_dir = os.path.join(project_root, "data")
     os.makedirs(data_dir, exist_ok=True)
     
     output_file = os.path.join(data_dir, "eurusd_data.csv")

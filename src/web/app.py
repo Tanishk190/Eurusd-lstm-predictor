@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-from predict import predict_next_day
+from src.models.predict import predict_next_day
 
 app = Flask(__name__)
 
