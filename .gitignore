@@ -65,3 +65,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Generated results
+src/web/static/training_results.png
