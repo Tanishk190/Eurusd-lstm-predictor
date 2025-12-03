@@ -61,7 +61,7 @@ ML-Project/
 
 3. **Install dependencies**
    ```bash
-   pip install flask yfinance pandas numpy tensorflow scikit-learn matplotlib
+   pip install -r requirements.txt
    ```
 
 ## Usage
