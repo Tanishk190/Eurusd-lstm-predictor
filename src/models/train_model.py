@@ -15,7 +15,16 @@ from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 import matplotlib.pyplot as plt
 import joblib
 import os
+import random
 from src.features.indicators import add_all_indicators
+
+
+def set_seeds(seed=42):
+    """Set seeds for reproducibility"""
+    random.seed(seed)
+    np.random.seed(seed)
+    tf.random.set_seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
 
 
 def create_sequences(data, seq_length=60):
@@ -37,6 +46,9 @@ def create_sequences(data, seq_length=60):
 
 
 def train_lstm_model():
+    # Set seeds for reproducibility
+    set_seeds(42)
+    
     print("=" * 60)
     print("LSTM Model Training with Technical Indicators")
     print("=" * 60)

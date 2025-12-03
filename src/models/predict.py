@@ -120,10 +120,10 @@ def predict_next_day(return_data=False):
     print("Prediction Results")
     print("=" * 60)
     print(f"Current Date:      {last_date.strftime('%Y-%m-%d')}")
-    print(f"Current Close:     {current_close:.4f}")
+    print(f"Current Close:     {current_close:.5f}")
     print(f"Predicted Date:    {next_date.strftime('%Y-%m-%d')}")
-    print(f"Predicted Price:   {predicted_price:.4f}")
-    print(f"Expected Change:   {change:+.4f} ({change_percent:+.2f}%)")
+    print(f"Predicted Price:   {predicted_price:.5f}")
+    print(f"Expected Change:   {change:+.5f} ({change_percent:+.2f}%)")
     print("=" * 60)
     
     if return_data:

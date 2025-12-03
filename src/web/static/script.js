@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayResults(data) {
         // Update text stats
-        document.getElementById('current-price').textContent = data.current_close.toFixed(4);
+        document.getElementById('current-price').textContent = data.current_close.toFixed(5);
         document.getElementById('current-date').textContent = data.current_date;
-        document.getElementById('predicted-price').textContent = data.predicted_price.toFixed(4);
+        document.getElementById('predicted-price').textContent = data.predicted_price.toFixed(5);
         document.getElementById('predicted-date').textContent = data.predicted_date;
 
         // Show container
