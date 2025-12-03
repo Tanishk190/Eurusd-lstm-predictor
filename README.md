@@ -14,94 +14,99 @@ A machine learning web application that predicts the next day's closing price fo
 - **RESTful API**: JSON API endpoint for programmatic access to predictions
 
 ## Project Structure
-
-```
-ML-Project/
-├── app.py              # Flask web application
-├── fetch_data.py       # Data fetching script
-├── train_model.py      # Model training script
-├── predict.py          # Prediction logic
-├── data/
-│   └── eurusd_data.csv # Historical EUR/USD data
-├── models/
-│   └── eurusd_lstm_model.h5  # Trained LSTM model
-├── static/
-│   ├── style.css       # Web styling
-│   ├── script.js       # Frontend JavaScript
-│   └── prediction_chart.png  # Generated charts
-└── templates/
-    └── index.html      # Web interface
-```
-
-## Installation
-
-### Prerequisites
-
-- Python 3.7+
-- pip (Python package manager)
-
-### Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd ML-Project
-   ```
-
-2. **Create a virtual environment** (recommended)
-   ```bash
-   python -m venv venv
-   
-   # On Windows
-   venv\Scripts\activate
-   
-   # On macOS/Linux
-   source venv/bin/activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Usage
-
-### Step 1: Fetch Data
-
-Download the latest EUR/USD historical data:
-
-```bash
-python fetch_data.py
-```
-
-This will download 5 years of data and save it to `data/eurusd_data.csv`.
-
-### Step 2: Train the Model
-
-Train the LSTM model on the fetched data:
-
-```bash
-python train_model.py
-```
-
-This will:
-- Load and preprocess the data
-- Train the LSTM neural network
-- Save the trained model to `models/eurusd_lstm_model.h5`
-- Display training metrics and visualizations
-
-### Step 3: Run the Web Application
-
-Start the Flask web server:
-
-```bash
-python app.py
-```
-
-Then open your browser and navigate to:
-```
-http://127.0.0.1:5000
-```
+ 
+ ```
+ ML-Project/
+ ├── data/                   # Data files
+ ├── models/                 # Saved model artifacts
+ ├── src/                    # Source code
+ │   ├── data/               # Data fetching
+ │   ├── features/           # Feature engineering
+ │   ├── models/             # Training and prediction
+ │   └── web/                # Web application
+ ├── main.py                 # Unified entry point
+ └── ...
+ ```
+ 
+ ## Installation
+ 
+ ### Prerequisites
+ 
+ - Python 3.7+
+ - pip (Python package manager)
+ 
+ ### Setup
+ 
+ 1. **Clone the repository**
+    ```bash
+    git clone <repository-url>
+    cd ML-Project
+    ```
+ 
+ 2. **Create a virtual environment** (recommended)
+    ```bash
+    python -m venv venv
+    
+    # On Windows
+    venv\Scripts\activate
+    
+    # On macOS/Linux
+    source venv/bin/activate
+    ```
+ 
+ 3. **Install dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+ 
+ ## Usage
+ 
+ You can run all components of the project using the `main.py` script.
+ 
+ ### Step 1: Fetch Data
+ 
+ Download the latest EUR/USD historical data:
+ 
+ ```bash
+ python main.py --fetch
+ ```
+ 
+ This will download 5 years of data and save it to `data/eurusd_data.csv`.
+ 
+ ### Step 2: Train the Model
+ 
+ Train the LSTM model on the fetched data:
+ 
+ ```bash
+ python main.py --train
+ ```
+ 
+ This will:
+ - Load and preprocess the data
+ - Train the LSTM neural network
+ - Save the trained model to `models/eurusd_lstm_model.h5`
+ - Display training metrics and visualizations
+ 
+ ### Step 3: Run the Web Application
+ 
+ Start the Flask web server:
+ 
+ ```bash
+ python main.py --web
+ ```
+ 
+ Then open your browser and navigate to:
+ ```
+ http://127.0.0.1:5000
+ ```
+ 
+ ### Make a Single Prediction
+ 
+ To generate a prediction for the next trading day without starting the web app:
+ 
+ ```bash
+ python main.py --predict
+ ```
 
 ### API Endpoint
 
