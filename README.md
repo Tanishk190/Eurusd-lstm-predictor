@@ -164,7 +164,7 @@ Response format:
 
 - [ ] Add multiple currency pair support
 - [ ] Implement model performance tracking
-- [ ] Add technical indicators (RSI, MACD, etc.)
+- [✓] Add technical indicators (RSI, MACD, etc.)
 - [ ] Deploy to cloud platform (Heroku, AWS, etc.)
 - [ ] Add user authentication
 - [ ] Historical prediction accuracy dashboard
