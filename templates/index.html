@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUR/USD Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>EUR/USD Price Prediction</h1>
+            <p>Machine Learning Model (Random Forest)</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <button id="predict-btn" class="btn-primary">Get Prediction</button>
+                
+                <div id="loading" class="hidden">
+                    <div class="spinner"></div>
+                    <p>Analyzing market data...</p>
+                </div>
+
+                <div id="result-container" class="hidden">
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h3>Current Price</h3>
+                            <p id="current-price" class="price">--</p>
+                            <span id="current-date" class="date">--</span>
+                        </div>
+                        <div class="stat-box highlight">
+                            <h3>Predicted Price</h3>
+                            <p id="predicted-price" class="price">--</p>
+                            <span id="predicted-date" class="date">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="predictionChart"></canvas>
+                    </div>
+                </div>
+                
+                <div id="error-message" class="hidden error"></div>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
