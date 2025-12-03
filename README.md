@@ -61,52 +61,56 @@ A machine learning web application that predicts the next day's closing price fo
  
  ## Usage
  
- You can run all components of the project using the `main.py` script.
+ You can run the project using the unified `main.py` script.
  
- ### Step 1: Fetch Data
+ ### Interactive Menu (Recommended)
  
- Download the latest EUR/USD historical data:
- 
- ```bash
- python main.py --fetch
- ```
- 
- This will download 5 years of data and save it to `data/eurusd_data.csv`.
- 
- ### Step 2: Train the Model
- 
- Train the LSTM model on the fetched data:
+ Simply run the script without arguments to see the interactive menu:
  
  ```bash
- python main.py --train
+ python main.py
  ```
  
- This will:
- - Load and preprocess the data
- - Train the LSTM neural network
- - Save the trained model to `models/eurusd_lstm_model.h5`
- - Display training metrics and visualizations
+ You will be prompted to choose an action:
+ 1. Fetch latest data
+ 2. Train model
+ 3. Make prediction
+ 4. Run web application
+ 5. Run full pipeline
  
- ### Step 3: Run the Web Application
+ ### Command Line Arguments
  
- Start the Flask web server:
+ You can also use command-line flags for automation:
  
+ | Flag | Alias | Description |
+ |------|-------|-------------|
+ | `--fetch` | `-f` | Fetch latest data |
+ | `--train` | `-t` | Train the LSTM model |
+ | `--predict` | `-p` | Make a prediction for the next day |
+ | `--web` | `-w` | Run the web application |
+ | `--pipeline` | | Run full pipeline (Fetch -> Train -> Web) |
+ | `--interactive` | `-i` | Show interactive menu |
+ 
+ Example:
  ```bash
- python main.py --web
+ python main.py -p  # Make a prediction
+ python main.py --pipeline # Run everything
  ```
+
+ ### Network Access (Run on other devices)
  
- Then open your browser and navigate to:
- ```
- http://127.0.0.1:5000
- ```
+ The web application is configured to be accessible from other devices on the same network.
  
- ### Make a Single Prediction
+ 1. Run the web app: `python main.py -w`
+ 2. Find your computer's local IP address (e.g., `192.168.x.x`).
+ 3. On your phone or other device, navigate to `http://YOUR_LOCAL_IP:5000`.
  
- To generate a prediction for the next trading day without starting the web app:
+ > **Note:** You may need to allow port 5000 through your firewall.
+
+ ### Model Details
  
- ```bash
- python main.py --predict
- ```
+ - **Precision**: Predictions are displayed with **5 decimal places** (e.g., 1.08567).
+ - **Reproducibility**: Random seeds are fixed to ensure consistent results across training runs.
 
 ### API Endpoint
 
