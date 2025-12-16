@@ -10,8 +10,9 @@ A machine learning web application that predicts the next day's closing price fo
 - **Data Fetching**: Automatically fetches 5 years of EUR/USD historical data using Yahoo Finance API
 - **LSTM Model**: Uses a Long Short-Term Memory neural network for time series prediction
 - **Web Interface**: Interactive Flask-based web application with real-time predictions
-- **Visualization**: Displays prediction charts and historical data analysis
-- **RESTful API**: JSON API endpoint for programmatic access to predictions
+- **Visualization**: Displays prediction charts and historical/backtest analysis
+- **Backtesting**: One-click historical backtest with MAE/MSE/RMSE and chart
+- **RESTful API**: JSON API endpoints for programmatic access to predictions and backtests
 
 ## Project Structure
  
@@ -76,7 +77,10 @@ A machine learning web application that predicts the next day's closing price fo
  2. Train model
  3. Make prediction
  4. Run web application
- 5. Run full pipeline
+4. Backtest model on historical data
+5. Run web application
+6. Run full pipeline
+7. Exit
  
  ### Command Line Arguments
  
@@ -87,6 +91,7 @@ A machine learning web application that predicts the next day's closing price fo
  | `--fetch` | `-f` | Fetch latest data |
  | `--train` | `-t` | Train the LSTM model |
  | `--predict` | `-p` | Make a prediction for the next day |
+| `--backtest` | `-b` | Run historical backtest with metrics and chart |
  | `--web` | `-w` | Run the web application |
  | `--pipeline` | | Run full pipeline (Fetch -> Train -> Web) |
  | `--interactive` | `-i` | Show interactive menu |
@@ -95,6 +100,7 @@ A machine learning web application that predicts the next day's closing price fo
  ```bash
  python main.py -p  # Make a prediction
  python main.py --pipeline # Run everything
+python main.py --backtest # Run historical backtest
  ```
 
  ### Network Access (Run on other devices)
@@ -133,6 +139,16 @@ Response format:
 }
 ```
 
+### Backtest Endpoint
+
+Run a backtest and get metrics:
+
+```bash
+curl http://127.0.0.1:5000/api/backtest
+```
+
+Returns MSE, MAE, RMSE, and test sample count. A chart is also saved locally at `src/web/static/backtest_results.png` after a run (ignored by git; generated on demand).
+
 ## How It Works
 
 1. **Data Collection**: `fetch_data.py` retrieves historical EUR/USD exchange rates from Yahoo Finance
@@ -149,6 +165,16 @@ Response format:
 - **Output Layer**: Single dense layer for next-day prediction
 - **Optimizer**: Adam
 - **Loss Function**: Mean Squared Error (MSE)
+
+## Screenshots (generated locally)
+
+These images are generated when you run the app and are ignored by git. If you don’t see them, run the corresponding action first.
+
+- Prediction chart (after running a prediction):  
+  `src/web/static/prediction_chart.png`
+
+- Backtest chart (after running a backtest):  
+  `src/web/static/backtest_results.png`
 
 ## Dependencies
 
