@@ -12,6 +12,7 @@ def main():
     group.add_argument('-f', '--fetch', action='store_true', help='Fetch latest data')
     group.add_argument('-t', '--train', action='store_true', help='Train the LSTM model')
     group.add_argument('-p', '--predict', action='store_true', help='Make a prediction for the next day')
+    group.add_argument('-b', '--backtest', action='store_true', help='Run historical backtest of the trained model')
     group.add_argument('-w', '--web', action='store_true', help='Run the web application')
     group.add_argument('--pipeline', action='store_true', help='Run full pipeline: Fetch -> Train -> Web')
     group.add_argument('-i', '--interactive', action='store_true', help='Show interactive menu')
@@ -25,9 +26,10 @@ def main():
         print("1. Fetch latest data")
         print("2. Train model")
         print("3. Make prediction")
-        print("4. Run web application")
-        print("5. Run full pipeline (Fetch -> Train -> Web)")
-        print("6. Exit")
+        print("4. Backtest model on historical data")
+        print("5. Run web application")
+        print("6. Run full pipeline (Fetch -> Train -> Web)")
+        print("7. Exit")
         
         try:
             choice = input("\nEnter choice (1-6): ")
@@ -38,8 +40,10 @@ def main():
             elif choice == '3':
                 args.predict = True
             elif choice == '4':
-                args.web = True
+                args.backtest = True
             elif choice == '5':
+                args.web = True
+            elif choice == '6':
                 args.pipeline = True
             else:
                 print("Exiting...")
@@ -59,6 +63,10 @@ def main():
     elif args.predict:
         from src.models.predict import predict_next_day
         predict_next_day()
+
+    elif args.backtest:
+        from src.models.backtest import backtest_model
+        backtest_model()
         
     elif args.web:
         from src.web.app import app

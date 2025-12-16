@@ -15,8 +15,9 @@
         </header>
 
         <main>
+            <!-- Prediction Card -->
             <div class="card">
-                <button id="predict-btn" class="btn-primary">Get Prediction</button>
+                <button id="predict-btn" class="btn-primary">Get Latest Prediction</button>
                 
                 <div id="loading" class="hidden">
                     <div class="spinner"></div>
@@ -43,6 +44,52 @@
                 </div>
                 
                 <div id="error-message" class="hidden error"></div>
+            </div>
+
+            <!-- Backtest Card -->
+            <div class="card card-secondary">
+                <div class="card-header-row">
+                    <h2>Historical Backtest</h2>
+                    <button id="backtest-btn" class="btn-secondary">Run Backtest</button>
+                </div>
+
+                <div id="backtest-loading" class="hidden loading-inline">
+                    <div class="spinner small"></div>
+                    <p>Running backtest on historical data...</p>
+                </div>
+
+                <div id="backtest-result-container" class="hidden">
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <span class="metric-label">Test Samples</span>
+                            <span id="backtest-samples" class="metric-value">--</span>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">MSE</span>
+                            <span id="backtest-mse" class="metric-value">--</span>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">MAE</span>
+                            <span id="backtest-mae" class="metric-value">--</span>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">RMSE</span>
+                            <span id="backtest-rmse" class="metric-value">--</span>
+                        </div>
+                    </div>
+
+                    <div class="backtest-chart-wrapper">
+                        <img id="backtest-chart-img"
+                             src="{{ url_for('static', filename='backtest_results.png') }}?v={{ range(1, 1000) | random }}"
+                             alt="Backtest Results Chart"
+                             class="backtest-chart-img">
+                        <p class="chart-caption">
+                            Backtest results: model predictions vs actual EUR/USD closing prices on the out-of-sample test period.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="backtest-error-message" class="hidden error"></div>
             </div>
         </main>
     </div>

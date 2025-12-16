@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingDiv = document.getElementById('loading');
     const resultContainer = document.getElementById('result-container');
     const errorDiv = document.getElementById('error-message');
+
+    const backtestBtn = document.getElementById('backtest-btn');
+    const backtestLoading = document.getElementById('backtest-loading');
+    const backtestResultContainer = document.getElementById('backtest-result-container');
+    const backtestErrorDiv = document.getElementById('backtest-error-message');
+    const backtestChartImg = document.getElementById('backtest-chart-img');
+
     let chartInstance = null;
 
     predictBtn.addEventListener('click', async () => {
@@ -29,6 +36,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    backtestBtn.addEventListener('click', async () => {
+        // Reset backtest state
+        backtestErrorDiv.classList.add('hidden');
+        backtestResultContainer.classList.add('hidden');
+        backtestLoading.classList.remove('hidden');
+        backtestBtn.disabled = true;
+
+        try {
+            const response = await fetch('/api/backtest');
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                displayBacktestResults(result.data);
+            } else {
+                showBacktestError(result.message || 'Backtest failed');
+            }
+        } catch (error) {
+            showBacktestError('Failed to connect to the server');
+        } finally {
+            backtestLoading.classList.add('hidden');
+            backtestBtn.disabled = false;
+        }
+    });
+
     function displayResults(data) {
         // Update text stats
         document.getElementById('current-price').textContent = data.current_close.toFixed(5);
@@ -41,6 +72,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Render Chart
         renderChart(data);
+    }
+
+    function displayBacktestResults(data) {
+        document.getElementById('backtest-samples').textContent = data.n_test_samples;
+        document.getElementById('backtest-mse').textContent = data.mse.toFixed(6);
+        document.getElementById('backtest-mae').textContent = data.mae.toFixed(6);
+        document.getElementById('backtest-rmse').textContent = data.rmse.toFixed(6);
+
+        // Bust cache for the static image so user sees latest chart
+        if (backtestChartImg) {
+            const url = new URL(backtestChartImg.src, window.location.origin);
+            url.searchParams.set('t', Date.now().toString());
+            backtestChartImg.src = url.toString();
+        }
+
+        backtestResultContainer.classList.remove('hidden');
     }
 
     function renderChart(data) {
@@ -129,5 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function showError(msg) {
         errorDiv.textContent = msg;
         errorDiv.classList.remove('hidden');
+    }
+
+    function showBacktestError(msg) {
+        backtestErrorDiv.textContent = msg;
+        backtestErrorDiv.classList.remove('hidden');
     }
 });

@@ -58,6 +58,43 @@ header p {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.card + .card {
+    margin-top: 1.5rem;
+}
+
+.card-secondary {
+    margin-top: 1.5rem;
+}
+
+.card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-header-row h2 {
+    font-size: 1.25rem;
+}
+
+.btn-secondary {
+    padding: 0.6rem 1.4rem;
+    background-color: transparent;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(148, 163, 184, 0.12);
+    color: var(--text-primary);
+    border-color: rgba(148, 163, 184, 0.9);
+}
+
 .btn-primary {
     display: block;
     width: 100%;
@@ -97,6 +134,12 @@ header p {
     margin: 0 auto 1rem;
 }
 
+.spinner.small {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+}
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -107,6 +150,14 @@ header p {
     text-align: center;
     color: var(--text-secondary);
     padding: 2rem 0;
+}
+
+.loading-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
 }
 
 /* Stats Grid */
@@ -163,8 +214,57 @@ header p {
     border-radius: 0.5rem;
 }
 
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.metric-box {
+    background-color: rgba(15, 23, 42, 0.7);
+    border-radius: 0.75rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.metric-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.backtest-chart-wrapper {
+    margin-top: 0.75rem;
+}
+
+.backtest-chart-img {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    display: block;
+}
+
+.chart-caption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
 @media (max-width: 600px) {
     .stats-grid {
         grid-template-columns: 1fr;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
