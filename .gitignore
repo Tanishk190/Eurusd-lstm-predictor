@@ -69,3 +69,6 @@ Thumbs.db
 # Generated results
 src/web/static/training_results.png
 src/web/static/backtest_results.png
+
+# Media files
+*.mkv
