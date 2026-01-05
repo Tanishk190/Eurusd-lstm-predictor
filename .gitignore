@@ -40,11 +40,11 @@ venv.bak/
 .vscode/
 
 # Machine Learning
-# *.h5
-# *.pkl
-# *.pickle
-# *.joblib
-# *.model
+*.h5
+*.pkl
+*.pickle
+*.joblib
+*.model
 
 # Data files (uncomment if you want to exclude data)
 data/
