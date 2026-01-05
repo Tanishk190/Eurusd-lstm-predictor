@@ -45,6 +45,7 @@ venv.bak/
 *.pickle
 *.joblib
 *.model
+models/
 
 # Data files (uncomment if you want to exclude data)
 data/
