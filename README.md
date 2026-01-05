@@ -40,7 +40,7 @@ A machine learning web application that predicts the next day's closing price fo
  
  1. **Clone the repository**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Tanishk190/Eurusd-lstm-predictor.git
     cd ML-Project
     ```
  
