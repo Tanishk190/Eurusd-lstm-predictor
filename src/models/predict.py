@@ -80,6 +80,10 @@ def predict_next_day(return_data=False):
     # Filter to use the same features as training
     dataset = data[feature_columns].values
     
+    # Check if dataset is empty
+    if dataset.shape[0] == 0:
+        raise ValueError(f"Found array with 0 sample(s) (shape={dataset.shape}) while a minimum of 1 is required by MinMaxScaler.")
+    
     # Scale the data
     scaled_data = scaler.transform(dataset)
     
